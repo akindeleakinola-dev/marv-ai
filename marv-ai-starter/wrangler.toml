@@ -1,7 +1,9 @@
-marv-ai/
-├── public/
-│   └── index.html
-├── src/
-│   └── worker.js
-├── wrangler.toml
-└── README.md
+
+name = "marv-ai"
+main = "src/worker.js"
+compatibility_date = "2026-10-10"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
