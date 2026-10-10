@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Marv AI helps filmmakers turn ideas into movie stories and scripts.">
+  <title>Marv AI — Movie Story Studio</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090e1b;--panel:#111a2d;--panel2:#17223a;--line:#2a3854;--text:#f4f7ff;--muted:#a9b6cc;--purple:#8b5cf6;--cyan:#67e8f9}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#20204a 0,transparent 42%),var(--bg);color:var(--text);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{width:min(1060px,100%);margin:auto;padding:22px 16px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:42px}.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.08em}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,#8b5cf6,#22d3ee);display:grid;place-items:center;color:#080d19;font-size:22px}.pill{font-size:12px;color:#d6ccff;border:1px solid #594a8d;border-radius:999px;padding:5px 10px}
+    .hero{max-width:760px;margin-bottom:28px}.eyebrow{color:var(--cyan);font-weight:750;font-size:12px;letter-spacing:.16em;text-transform:uppercase}.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.05;letter-spacing:-.04em;margin:12px 0 14px}.hero h1 span{background:linear-gradient(90deg,#c4b5fd,#67e8f9);color:transparent;background-clip:text}.hero p{color:var(--muted);font-size:17px;max-width:660px;margin:0}
+    .layout{display:grid;grid-template-columns:minmax(0, .92fr) minmax(0,1.08fr);gap:18px;align-items:start}.card{background:rgba(17,26,45,.94);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 20px 70px #0002}.card h2{margin:0 0 5px;font-size:20px}.sub{margin:0 0 20px;color:var(--muted);font-size:13px}
+    label{display:block;font-size:13px;font-weight:700;margin:15px 0 7px;color:#dbe5f8}input,select,textarea{width:100%;background:#0a1223;border:1px solid #34425f;color:var(--text);border-radius:12px;padding:12px 13px;font:inherit;outline:none}textarea{resize:vertical;min-height:105px}input:focus,select:focus,textarea:focus{border-color:#9b8afb;box-shadow:0 0 0 3px #8b5cf622}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{width:100%;border:0;border-radius:12px;background:linear-gradient(100deg,#8b5cf6,#5ee7f5);color:#07101d;font-weight:850;padding:14px 16px;margin-top:19px;cursor:pointer;font-size:15px}.btn:disabled{opacity:.55;cursor:wait}.note{font-size:12px;color:var(--muted);margin:11px 0 0}.result{min-height:420px;white-space:pre-wrap;overflow-wrap:anywhere;color:#e9efff;font-size:14px}.placeholder{display:grid;min-height:380px;place-items:center;text-align:center;color:var(--muted);padding:25px}.placeholder .symbol{font-size:42px;margin-bottom:12px}.result-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.smallbtn{background:#202c45;border:1px solid #354562;border-radius:9px;padding:8px 12px;color:#eaf0ff;cursor:pointer;font-weight:650;font-size:12px}.status{display:none;padding:10px 12px;border-radius:10px;margin-top:12px;font-size:13px}.status.show{display:block}.status.error{background:#3a1723;color:#fecdd3}.status.info{background:#172e3a;color:#a5f3fc}.footer{margin-top:24px;text-align:center;color:#7786a1;font-size:12px}.footer a{color:#b9a7ff}
+    @media(max-width:760px){.layout{grid-template-columns:1fr}.top{margin-bottom:30px}.card{padding:18px}.result{min-height:280px}.placeholder{min-height:270px}.hero p{font-size:15px}}@media(max-width:380px){.two{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand"><div class="logo">M</div><span>MARV AI</span></div>
+      <span class="pill">EARLY ACCESS · TEXT STUDIO</span>
+    </header>
+    <section class="hero">
+      <div class="eyebrow">For storytellers & filmmakers</div>
+      <h1>Your idea.<br><span>Your next movie.</span></h1>
+      <p>Turn a simple idea into an original story with characters, dialogue, scene descriptions and camera directions. Made for creators building stories one scene at a time.</p>
+    </section>
+    <section class="layout">
+      <form id="storyForm" class="card">
+        <h2>Create a movie story</h2>
+        <p class="sub">Give Marv AI the basics. You can refine the result later.</p>
+        <label for="idea">Your story idea *</label>
+        <textarea id="idea" maxlength="1200" required placeholder="Example: A struggling Lagos tailor discovers that the wealthy customer who insulted him is connected to his family’s past."></textarea>
+        <div class="two">
+          <div><label for="genre">Genre</label><select id="genre"><option>Drama</option><option>Romance</option><option>Suspense</option><option>Comedy</option><option>Family</option><option>Action</option><option>Inspirational</option></select></div>
+          <div><label for="setting">Setting</label><select id="setting"><option>Lagos, Nigeria</option><option>Other Nigerian city</option><option>Rural Nigeria</option><option>Any location</option></select></div>
+        </div>
+        <div class="two">
+          <div><label for="scenes">Number of scenes</label><select id="scenes"><option value="3">3 scenes</option><option value="5" selected>5 scenes</option><option value="8">8 scenes</option><option value="10">10 scenes</option></select></div>
+          <div><label for="tone">Story tone</label><select id="tone"><option>Emotional and realistic</option><option>Funny and light</option><option>High suspense</option><option>Romantic</option><option>Fast-paced and cinematic</option></select></div>
+        </div>
+        <label for="ending">Ending preference</label>
+        <select id="ending"><option>Complete ending</option><option>Suspenseful cliffhanger</option><option>Hopeful ending</option><option>Unexpected twist</option></select>
+        <button id="generateBtn" class="btn" type="submit">✦ Generate my story</button>
+        <p class="note">Do not enter passwords, private information, or another person’s sensitive details. AI output may need editing.</p>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+      <section class="card" aria-label="Generated story">
+        <h2>Your screenplay</h2>
+        <p class="sub">Your generated story will appear here.</p>
+        <div class="result-tools"><button class="smallbtn" id="copyBtn" type="button" disabled>Copy script</button><button class="smallbtn" id="downloadBtn" type="button" disabled>Download .txt</button><button class="smallbtn" id="demoBtn" type="button">Load sample</button></div>
+        <div id="result" class="result"><div class="placeholder"><div><div class="symbol">🎬</div><strong>Your next story starts here.</strong><p>Enter an idea and generate your first screenplay.</p></div></div></div>
+      </section>
+    </section>
+    <footer class="footer">MARV AI · Built for original storytelling · <span id="year"></span><br>AI generation becomes available after the secure API is configured and deployed.</footer>
+  </main>
+<script>
+const form=document.getElementById('storyForm'), result=document.getElementById('result'), statusBox=document.getElementById('status'), btn=document.getElementById('generateBtn');
+let lastScript='';
+document.getElementById('year').textContent=new Date().getFullYear();
+function showStatus(message,type='info'){statusBox.textContent=message;statusBox.className='status show '+type}
+function setScript(text){lastScript=text;result.textContent=text;document.getElementById('copyBtn').disabled=!text;document.getElementById('downloadBtn').disabled=!text}
+form.addEventListener('submit',async e=>{
+ e.preventDefault();const idea=document.getElementById('idea').value.trim();if(!idea){showStatus('Please enter your story idea.','error');return}
+ btn.disabled=true;btn.textContent='Creating your story…';showStatus('Generating your script. This can take a little while.');setScript('');
+ try{
+  const response=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idea,genre:document.getElementById('genre').value,setting:document.getElementById('setting').value,scenes:Number(document.getElementById('scenes').value),tone:document.getElementById('tone').value,ending:document.getElementById('ending').value})});
+  const data=await response.json().catch(()=>({error:'The server returned an unreadable response.'}));
+  if(!response.ok)throw new Error(data.error||'Could not generate the story. Please try again.');
+  if(!data.story)throw new Error('The AI returned an empty story. Please try again.');
+  setScript(data.story);showStatus('Story generated. Read it through and edit it to fit your production.','info');
+ }catch(err){showStatus(err.message||'Connection failed. Check that the API is configured and the site is deployed.','error')}
+ finally{btn.disabled=false;btn.textContent='✦ Generate my story'}
+});
+document.getElementById('copyBtn').addEventListener('click',async()=>{if(!lastScript)return;try{await navigator.clipboard.writeText(lastScript);showStatus('Script copied to clipboard.','info')}catch{showStatus('Copy is not available in this browser. Select and copy the text manually.','error')}});
+document.getElementById('downloadBtn').addEventListener('click',()=>{if(!lastScript)return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lastScript],{type:'text/plain;charset=utf-8'}));a.download='marv-ai-screenplay.txt';a.click();URL.revokeObjectURL(a.href)});
+document.getElementById('demoBtn').addEventListener('click',()=>{document.getElementById('idea').value='A hardworking young tailor in Lagos helps a stranger, unaware that the stranger knows a secret about his late father.';setScript(`MARV AI — SAMPLE SCRIPT (DEMO ONLY)\n\nTITLE: THE THREAD OF FATE\nGENRE: Drama\n\nMAIN CHARACTERS\nTUNDE (27): A thoughtful Lagos tailor. Wears a faded blue shirt, dark trousers and a measuring tape around his neck.\nMRS. BELLO (50s): A composed businesswoman in a patterned aso-oke outfit, carrying an old envelope.\n\nSCENE 1 — INT. TUNDE’S TAILOR SHOP — DAY\nCAMERA: Wide establishing shot, then a slow push-in toward Tunde’s sewing machine.\nThe power flickers. Tunde keeps sewing by the light from the shop window. A woman steps inside holding a torn jacket.\nMRS. BELLO: Please, can you repair this before evening?\nTUNDE: I can try. This fabric looks older than the shop itself.\nShe smiles faintly, then notices a photograph pinned beside his mirror. Her smile disappears.\n\nSCENE 2 — EXT. SHOP FRONT — LATE AFTERNOON\nCAMERA: Over-the-shoulder shot as Mrs. Bello studies the photograph; close-up on her trembling hand.\nMRS. BELLO: Where did you get that picture?\nTUNDE: It was my father’s. Why?\nShe opens her handbag, but before she can answer, a phone rings. She looks at the caller ID and steps away.\n\nSCENE 3 — INT. TUNDE’S SHOP — EVENING\nCAMERA: Low-angle shot of the door opening; slow close-up on an envelope placed on the table.\nMrs. Bello has gone. The repaired jacket lies beside a sealed envelope addressed to Tunde. He opens it and finds a second photograph — his father standing beside Mrs. Bello, both much younger.\nTUNDE (whispering): What have you been hiding, Dad?\nA knock comes from the dark doorway.\nVOICE: If you want the truth, don’t trust the woman who brought that envelope.\n\nEND OF SAMPLE — CLIFFHANGER\n\nThis is placeholder demo text, not an AI-generated response.`);showStatus('Loaded a sample so you can test the interface. This sample did not use the AI API.','info')});
+</script>
+</body>
+</html>
