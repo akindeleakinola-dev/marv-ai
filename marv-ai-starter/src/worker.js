@@ -83,15 +83,18 @@ Make the dialogue natural and culturally grounded when appropriate. Do not claim
         );
 
         const data = await aiResponse.json().catch(() => ({}));
-        if (!aiResponse.ok) {
-          // Avoid returning upstream details that could expose sensitive configuration.
-          const code = aiResponse.status === 429 ? 429 : 502;
-          return json({
-            error: aiResponse.status === 429
-              ? "The AI service is temporarily rate-limited. Please wait and try again."
-              : "The AI service could not complete this request. Check your API setup and model availability."
-          }, code);
-        }
+        
+if (!aiResponse.ok) {
+  const googleMessage =
+    data?.error?.message || "No error details returned";
+
+  return json({
+    error: "Google AI request failed.",
+    googleStatus: aiResponse.status,
+    details: googleMessage
+  }, 502);
+}
+
 
         const story = (data.candidates?.[0]?.content?.parts || [])
           .map(part => part.text || "")
