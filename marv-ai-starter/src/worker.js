@@ -84,13 +84,18 @@ Make the dialogue natural and culturally grounded when appropriate. Do not claim
 
         const data = await aiResponse.json().catch(() => ({}));
     
+
 if (!aiResponse.ok) {
-  return json({
+  return new Response(JSON.stringify({
     error: "Google AI request failed.",
     googleStatus: aiResponse.status,
     details: data?.error?.message || JSON.stringify(data)
-  }, 502);
+  }), {
+    status: 502,
+    headers: { "Content-Type": "application/json" }
+  });
 }
+
 
 
 
