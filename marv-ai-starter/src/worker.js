@@ -118,26 +118,39 @@ FINAL QUALITY CHECK:
 - The output is original, coherent and suitable for a small film crew.`;
 
       try {
-        const aiResponse = await fetch(
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-goog-api-key": env.GEMINI_API_KEY
-            },
-            body: JSON.stringify({
-              contents: [{ role: "user", parts: [{ text: prompt }] }],
-              generationConfig: {
-                temperature: 0.85,
-                maxOutputTokens: MAX_OUTPUT_TOKENS
-              }
-            })
-          }
-        );
+        
+        let aiResponse;
+        let data = {};
 
-        const data = await aiResponse.json().catch(() => ({}));
-    
+        for (let attempt = 0; attempt < 3; attempt++) {
+          aiResponse = await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": env.GEMINI_API_KEY
+              },
+              body: JSON.stringify({
+                contents: [{ role: "user", parts: [{ text: prompt }] }],
+                generationConfig: {
+                  temperature: 0.85,
+                  maxOutputTokens: MAX_OUTPUT_TOKENS
+                }
+              })
+            }
+          );
+
+          data = await aiResponse.json().catch(() => ({}));
+
+          if (aiResponse.ok) break;
+
+          if (![429, 500, 502, 503, 504].includes(aiResponse.status) || attempt === 2) {
+            break;
+          }
+
+          await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
+        }
 
 if (!aiResponse.ok) {
   return new Response(JSON.stringify({
