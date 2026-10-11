@@ -85,15 +85,15 @@ Make the dialogue natural and culturally grounded when appropriate. Do not claim
         const data = await aiResponse.json().catch(() => ({}));
         
 if (!aiResponse.ok) {
-  const googleMessage =
-    data?.error?.message || "No error details returned";
-
+  
+if (!aiResponse.ok) {
   return json({
     error: "Google AI request failed.",
     googleStatus: aiResponse.status,
-    details: googleMessage
+    details: data?.error?.message || JSON.stringify(data)
   }, 502);
 }
+
 
 
         const story = (data.candidates?.[0]?.content?.parts || [])
