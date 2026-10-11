@@ -1,6 +1,6 @@
 const MAX_BODY_BYTES = 10_000;
 const MAX_IDEA_CHARS = 1200;
-const MAX_OUTPUT_TOKENS = 3500;
+const MAX_OUTPUT_TOKENS = 1800;
 
 export default {
   async fetch(request, env) {
