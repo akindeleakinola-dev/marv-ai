@@ -87,7 +87,7 @@ Make the dialogue natural and culturally grounded when appropriate. Do not claim
 
 if (!aiResponse.ok) {
   return new Response(JSON.stringify({
-    error: "Google AI request failed.",
+    error: `Google AI request failed (${aiResponse.status}): ${data?.error?.message || JSON.stringify(data)}`,
     googleStatus: aiResponse.status,
     details: data?.error?.message || JSON.stringify(data)
   }), {
